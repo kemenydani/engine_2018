@@ -6,8 +6,8 @@
           fixed
           :mini-variant="mini"
           v-model="drawer"
-          @mouseenter.native="mini = false"
-          @mouseleave.native="mini = true"
+          @mouseenter.native="mouseEnterDrawer( $event )"
+          @mouseleave.native="mouseLeaveDrawer( $event )"
           app
       >
         <v-switch v-model="dark"></v-switch>
@@ -22,6 +22,17 @@
               <v-list-tile-title>Home</v-list-tile-title>
             </v-list-tile-content>
           </router-link>
+  
+          <router-link is="v-list-tile" :to="{ name: 'settings.index' }">
+            <v-list-tile-action>
+              <v-icon>settings</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Page Settings</v-list-tile-title>
+            </v-list-tile-content>
+          </router-link>
+          
+          <v-divider inset></v-divider>
           
           <router-link is="v-list-tile" :to="{ name: 'article.list' }">
             <v-list-tile-action>
@@ -38,6 +49,15 @@
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Users</v-list-tile-title>
+            </v-list-tile-content>
+          </router-link>
+  
+          <router-link is="v-list-tile" :to="{ name: 'role.index' }">
+            <v-list-tile-action>
+              <v-icon>no_encryption</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Roles</v-list-tile-title>
             </v-list-tile-content>
           </router-link>
           
@@ -94,6 +114,38 @@ export default {
 	    locales: ['en-US', 'zh-CN'],
       location: '',
 	    colors: ['blue', 'green', 'purple', 'red']
+    }
+  },
+  methods: {
+  	mouseEnterDrawer( event )
+    {
+    	let dimensions = event.target.getBoundingClientRect();
+      let mouseX = event.clientX;
+      let mouseY = event.clientY;
+    	
+      let trackMouse = function(moveEvent)
+      {
+	      mouseX = moveEvent.clientX;
+	      mouseY = moveEvent.clientY;
+      };
+      
+      document.addEventListener('mousemove', trackMouse );
+      
+    	setTimeout( () =>
+      {
+	      this.mini = !(mouseX >= dimensions.left && mouseX <= dimensions.right && mouseY >= dimensions.top && mouseY <= dimensions.bottom);
+	      
+	      document.removeEventListener('mousemove', trackMouse);
+	      
+      }, 600)
+    },
+	  mouseLeaveDrawer( event )
+    {
+		
+	  },
+    trackMouse( event )
+    {
+  		
     }
   }
 }
