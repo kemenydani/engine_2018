@@ -6,8 +6,8 @@
           fixed
           :mini-variant="mini"
           v-model="drawer"
-          @mouseenter.native="mouseEnterDrawer( $event )"
-          @mouseleave.native="mouseLeaveDrawer( $event )"
+          @mouseenter.native="toggleDrawerDelayed( $event )"
+          @mouseleave.native="toggleDrawerDelayed( $event )"
           app
       >
         <v-switch v-model="dark"></v-switch>
@@ -117,35 +117,32 @@ export default {
     }
   },
   methods: {
-  	mouseEnterDrawer( event )
+    toggleDrawerDelayed( event )
     {
-    	let dimensions = event.target.getBoundingClientRect();
-      let mouseX = event.clientX;
-      let mouseY = event.clientY;
-    	
-      let trackMouse = function(moveEvent)
-      {
-	      mouseX = moveEvent.clientX;
-	      mouseY = moveEvent.clientY;
+	    let dimensions = event.target.getBoundingClientRect();
+	    let mouseX = event.clientX;
+	    let mouseY = event.clientY;
+
+	    let isInside = () => {
+		    return (mouseX >= dimensions.left && mouseX <= dimensions.right && mouseY >= dimensions.top && mouseY <= dimensions.bottom);
       };
-      
-      document.addEventListener('mousemove', trackMouse );
-      
-    	setTimeout( () =>
-      {
-	      this.mini = !(mouseX >= dimensions.left && mouseX <= dimensions.right && mouseY >= dimensions.top && mouseY <= dimensions.bottom);
-	      
-	      document.removeEventListener('mousemove', trackMouse);
-	      
-      }, 600)
-    },
-	  mouseLeaveDrawer( event )
-    {
-		
-	  },
-    trackMouse( event )
-    {
-  		
+	    
+	    let trackMouse = moveEvent =>
+	    {
+		    mouseX = moveEvent.clientX;
+		    mouseY = moveEvent.clientY;
+		    
+		    // If mouse leaves after tracking started, cancel tracking
+		    if(!isInside()) document.removeEventListener(moveEvent.type, trackMouse);
+	    };
+    	
+	    document.addEventListener('mousemove', trackMouse );
+     
+	    setTimeout( () =>
+	    {
+		    this.mini = !isInside();
+		    document.removeEventListener('mousemove', trackMouse );
+	    }, 650)
     }
   }
 }
