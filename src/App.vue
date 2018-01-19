@@ -4,11 +4,12 @@
       
       <v-navigation-drawer
           fixed
+          :mini-variant="mini"
           v-model="drawer"
+          @mouseenter.native="mini = false"
+          @mouseleave.native="mini = true"
           app
       >
-        
-        
         <v-switch v-model="dark"></v-switch>
         
         <v-list dense>
@@ -88,7 +89,7 @@ export default {
 	    dialog: false,
 	    dark: false,
 	    theme: 'primary',
-	    mini: false,
+	    mini: true,
 	    drawer: true,
 	    locales: ['en-US', 'zh-CN'],
       location: '',
