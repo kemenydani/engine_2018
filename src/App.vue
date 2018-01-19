@@ -7,30 +7,46 @@
           v-model="drawer"
           app
       >
+        
+        
         <v-switch v-model="dark"></v-switch>
         
         <v-list dense>
-          <v-list-tile @click="">
+          
+          <router-link is="v-list-tile" :to="{ name: 'dashboard' }">
             <v-list-tile-action>
               <v-icon>home</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>Home</v-list-tile-title>
             </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile @click="">
+          </router-link>
+          
+          <router-link is="v-list-tile" :to="{ name: 'article.list' }">
             <v-list-tile-action>
-              <v-icon>contact_mail</v-icon>
+              <v-icon>font_download</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Contact</v-list-tile-title>
+              <v-list-tile-title>Articles</v-list-tile-title>
             </v-list-tile-content>
-          </v-list-tile>
+          </router-link>
+  
+          <router-link is="v-list-tile" :to="{ name: 'user.list' }">
+            <v-list-tile-action>
+              <v-icon>supervisor_account</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Users</v-list-tile-title>
+            </v-list-tile-content>
+          </router-link>
+          
         </v-list>
       </v-navigation-drawer>
+      
+      
       <v-toolbar color="red" dark fixed app>
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title>Application</v-toolbar-title>
+        <v-toolbar-title>{{ $route.meta.title }}</v-toolbar-title>
         <div class="d-flex align-center" style="margin-left: auto">
   
           <v-menu offset-y>
@@ -75,6 +91,7 @@ export default {
 	    mini: false,
 	    drawer: true,
 	    locales: ['en-US', 'zh-CN'],
+      location: '',
 	    colors: ['blue', 'green', 'purple', 'red']
     }
   }

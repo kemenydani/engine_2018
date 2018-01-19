@@ -15,16 +15,15 @@ const View = resolve =>
 
 export default
 {
-    path: '/',
+    path: '',
     component: Index,
     children: [
         {
             path: '',
             component: View,
-            name: 'home',
+            name: '',
             meta: {
-                bg: true
-                //pageTitle: 'Dashboard',
+	            title: 'Dashboard',
             }
         },
         {
@@ -32,7 +31,7 @@ export default
             component: View,
             name: 'dashboard.view',
             meta: {
-                pageTitle: 'Dashboard',
+                title: 'Dashboard',
             }
         }
     ]

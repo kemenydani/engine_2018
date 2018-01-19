@@ -1,13 +1,16 @@
 <template>
-	<div>
+	
 		<router-view class="view-content" ></router-view>
-	</div>
+
 </template>
 
 <script>
 	
 	export default {
 		name: 'base-index',
+		props: {
+		
+		},
 		data() {
 			return {
 				data_field: 'data_field'

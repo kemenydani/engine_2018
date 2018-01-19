@@ -31,7 +31,7 @@ export default
             component: List,
             name: 'article.list',
             meta: {
-                pageTitle: 'List'
+                title: 'Articles'
             }
         },
         {
@@ -39,9 +39,7 @@ export default
             component: Create,
             name: 'article.create',
             meta: {
-                pageTitle: 'Create',
-                requiresAuth: true,
-                width: '70%'
+                title: 'Create Article'
             }
         }
     ]
