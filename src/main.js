@@ -15,6 +15,8 @@ Vue.use(VueAxios, axios);
 
 import ROUTES from './routes'
 
+//axios.defaults.baseURL = 'http://php_app/api/';
+
 new Vue({
   el: '#app',
   router: new Router({
