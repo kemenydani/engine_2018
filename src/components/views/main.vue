@@ -1,6 +1,5 @@
 
 <template>
-	
 	<v-app id="inspire" :dark="dark">
 		<v-navigation-drawer
 				fixed
@@ -94,13 +93,11 @@
 			</v-container>
 		</v-content>
 	</v-app>
-
-
 </template>
 
 <script>
 	export default {
-		name: 'main',
+		name: 'app-main',
 		props: {
 			source: String
 		},

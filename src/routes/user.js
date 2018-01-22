@@ -1,24 +1,15 @@
 const Index = resolve =>
 {
-	require.ensure(['../components/views/index.vue'], () =>
-	{
-		resolve(require('../components/views/index.vue'));
-	})
+	require.ensure(['../components/views/index.vue'], () => resolve(require('../components/views/index.vue')))
 };
 const Create = resolve =>
 {
-	require.ensure(['../components/views/user/create.vue'], () =>
-	{
-		resolve(require('../components/views/user/create.vue'));
-	})
+	require.ensure(['../components/views/user/create.vue'], () => resolve(require('../components/views/user/create.vue')))
 };
 
 const List = resolve =>
 {
-	require.ensure(['../components/views/user/list.vue'], () =>
-	{
-		resolve(require('../components/views/user/list.vue'));
-	})
+	require.ensure(['../components/views/user/list.vue'], () => resolve(require('../components/views/user/list.vue')))
 };
 
 export default

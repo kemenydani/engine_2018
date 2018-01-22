@@ -1,16 +1,10 @@
 const Index = resolve =>
 {
-    require.ensure(['../components/views/index.vue'], () =>
-    {
-        resolve(require('../components/views/index.vue'));
-    })
+    require.ensure(['../components/views/index.vue'], () => resolve(require('../components/views/index.vue')))
 };
 const View = resolve =>
 {
-    require.ensure(['../components/views/dashboard/view.vue'], () =>
-    {
-        resolve(require('../components/views/dashboard/view.vue'));
-    })
+    require.ensure(['../components/views/dashboard/view.vue'], () => resolve(require('../components/views/dashboard/view.vue')))
 };
 
 export default
