@@ -208,9 +208,7 @@
 		},
 		mounted()
 		{
-			console.log(UserDataService.getAll().then( users => {
-				console.log(users[0].id)
-			}));
+	
 		}
 	}
 	

@@ -15,7 +15,7 @@ export default
         {
             path: '',
             component: View,
-            name: '',
+            name: 'dashboard',
             meta: {
 	            title: 'Dashboard',
             }

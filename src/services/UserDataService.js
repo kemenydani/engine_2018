@@ -1,8 +1,8 @@
 import Connection from './Connection';
 
-const API_BASE = 'http://php_app/api/user/';
+const API_BASE = '/api/user/';
 
-class UserDataService {
+export default class UserDataService {
 	
 	constructor()
 	{
@@ -15,6 +15,9 @@ class UserDataService {
 		return this.Connection.get('all').then( response => response.data );
 	}
 	
-}
-
-export default new UserDataService();
+	logout()
+	{
+		return this.Connection.post('logout').then( response => response.data );
+	}
+	
+};

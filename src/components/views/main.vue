@@ -21,7 +21,7 @@
 						<v-list-tile-title>Home</v-list-tile-title>
 					</v-list-tile-content>
 				</router-link>
-				
+				<!--
 				<router-link is="v-list-tile" :to="{ name: 'settings.index' }">
 					<v-list-tile-action>
 						<v-icon>settings</v-icon>
@@ -30,7 +30,7 @@
 						<v-list-tile-title>Page Settings</v-list-tile-title>
 					</v-list-tile-content>
 				</router-link>
-				
+				-->
 				<v-divider inset></v-divider>
 				
 				<router-link is="v-list-tile" :to="{ name: 'article.list' }">
@@ -50,7 +50,7 @@
 						<v-list-tile-title>Users</v-list-tile-title>
 					</v-list-tile-content>
 				</router-link>
-				
+				<!--
 				<router-link is="v-list-tile" :to="{ name: 'role.index' }">
 					<v-list-tile-action>
 						<v-icon>no_encryption</v-icon>
@@ -59,7 +59,7 @@
 						<v-list-tile-title>Roles</v-list-tile-title>
 					</v-list-tile-content>
 				</router-link>
-			
+			-->
 			</v-list>
 		</v-navigation-drawer>
 		
@@ -68,6 +68,8 @@
 			<v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 			<v-toolbar-title>{{ $route.meta.title }}</v-toolbar-title>
 			<div class="d-flex align-center" style="margin-left: auto">
+				
+				<span>{{ $User.getName() }}</span>
 				
 				<v-menu offset-y>
 					<v-btn icon dark slot="activator">
@@ -83,7 +85,10 @@
 					<v-icon>message</v-icon>
 				</v-btn>
 				<v-btn icon>
-					<v-icon>notifications</v-icon>
+					<v-icon on>notifications</v-icon>
+				</v-btn>
+				<v-btn icon @click=" logout() ">
+					<v-icon>exit_to_app</v-icon>
 				</v-btn>
 			</div>
 		</v-toolbar>
@@ -96,6 +101,8 @@
 </template>
 
 <script>
+	import UserDataService from '../../services/UserDataService';
+	
 	export default {
 		name: 'app-main',
 		props: {
@@ -114,6 +121,11 @@
 			}
 		},
 		methods: {
+			logout(){
+				this.$User.logout().then( () => {
+					if( !this.$User.isLogged() ) this.$router.push('/login');
+				})
+			},
 			toggleDrawerDelayed( event )
 			{
 				let dimensions = event.target.getBoundingClientRect();

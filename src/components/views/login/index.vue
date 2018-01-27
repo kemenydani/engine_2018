@@ -10,15 +10,15 @@
 						<v-divider></v-divider>
 						<v-card-text>
 							<v-container>
-								<form @submit.prevent="onSignin">
+								<form @submit.prevent="onLogin">
 									<v-layout row>
 										<v-flex xs12>
 											<v-text-field
-													name="email"
+													name="user"
 													label="Mail"
-													id="email"
-													v-model="email"
-													type="email"
+													id="user"
+													v-model="user"
+													type="text"
 													required></v-text-field>
 										</v-flex>
 									</v-layout>
@@ -31,15 +31,6 @@
 													v-model="password"
 													type="password"
 													required></v-text-field>
-										</v-flex>
-									</v-layout>
-									<v-layout row>
-										<v-flex xs12>
-											<v-checkbox
-													label="Remember Me!"
-													v-model="checkbox"
-													:rules="[v => !!v || 'You must agree to continue!']"
-											></v-checkbox>
 										</v-flex>
 									</v-layout>
 									<v-layout row>
@@ -66,33 +57,25 @@
 	export default {
 		data () {
 			return {
-				email: '',
-				password: ''
-			}
-		},
-		computed: {
-			user () {
-			
-			},
-			error () {
-			
-			},
-			loading () {
-			
-			}
-		},
-		watch: {
-			user (value) {
-			
+				loading: false,
+				user: 'sno',
+				password: 'admin'
 			}
 		},
 		methods: {
-			onSignin () {
-				//this.$store.dispatch('signUserIn', {email: this.email, password: this.password})
-			},
-			onDismissed () {
-				//this.$store.dispatch('clearError')
+			onLogin ()
+			{
+				this.loading = true;
+				
+				this.$User.login( this.user, this.password ).then( ( response ) => {
+					this.loading = false;
+					this.$router.push('/dashboard');
+				});
 			}
+		},
+		created(){
+			if( this.$User.isLogged() ) this.$router.push('/dashboard');
 		}
+
 	}
 </script>

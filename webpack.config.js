@@ -77,8 +77,34 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true,
-    overlay: true
+      hot: true,
+	  port: 9000,
+	  allowedHosts: [
+		  'http://php_app/',
+	  ],
+	  disableHostCheck: true,
+      /*
+	  proxy:{
+		  '**' : {
+			  target: 'http://php_app/',
+			  changeOrigin: true,
+		  }
+	  }
+      */
+	  proxy: [{
+		  context: ["/api"],
+		  target: "http://php_app/",
+		  changeOrigin: true,
+	  }]
+      
+      
+      /*
+	proxy: [
+		//{ '**': { target: 'http://php_app/', secure: false, changeOrigin: true } },
+		  {'**':'http://php_app/'}
+    
+		]
+		*/
   },
   performance: {
     hints: false
