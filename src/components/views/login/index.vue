@@ -33,6 +33,16 @@
 													required></v-text-field>
 										</v-flex>
 									</v-layout>
+									
+									<v-layout row>
+										<v-flex xs12>
+											<v-checkbox
+													label="Do you agree?"
+													v-model="remember"
+											></v-checkbox>
+										</v-flex>
+									</v-layout>
+									
 									<v-layout row>
 										<v-flex xs12>
 											<v-btn type="submit" :disabled="loading" :loading="loading">
@@ -59,7 +69,8 @@
 			return {
 				loading: false,
 				user: 'sno',
-				password: 'admin'
+				password: 'admin',
+				remember: false
 			}
 		},
 		methods: {
@@ -67,7 +78,7 @@
 			{
 				this.loading = true;
 				
-				this.$User.login( this.user, this.password ).then( ( response ) => {
+				this.$User.login( this.user, this.password, this.remember ).then( ( response ) => {
 					this.loading = false;
 					this.$router.push('/dashboard');
 				});

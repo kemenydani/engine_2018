@@ -13,9 +13,9 @@ export default class User {
 		return this;
 	}
 	
-	login( user, password )
+	login( user, password, remember )
 	{
-		return this.DB.post('auth', { user, password }).then( response => response.data )
+		return this.DB.post('auth', { user, password, remember }).then( response => response.data )
 			       .then( data =>
 			       {
 			       	    this.logged = true;

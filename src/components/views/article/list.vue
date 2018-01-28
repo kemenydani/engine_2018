@@ -1,6 +1,16 @@
 <template>
 	<div>
 		article list
+		<router-link is="v-btn" :to="{ name: 'article.create' }"
+				fab
+				bottom
+				right
+				color="red"
+				dark
+				fixed
+		>
+			<v-icon>add</v-icon>
+		</router-link>
 	</div>
 </template>
 

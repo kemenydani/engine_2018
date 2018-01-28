@@ -1,8 +1,8 @@
 import Connection from './Connection';
 
-const API_BASE = '/api/user/';
+const API_BASE = '/api/article/';
 
-export default class UserDataService {
+export default class ArticleDataService {
 	
 	constructor()
 	{
